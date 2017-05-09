@@ -544,8 +544,8 @@ namespace RockWeb.Blocks.Finance
             var selectedAccountGuidList = new FinancialAccountService( new RockContext() ).GetByIds( selectedAccountIdList ).Select( a => a.Guid ).ToList();
             this.SetUserPreference( keyPrefix + "account-list", selectedAccountGuidList.AsDelimited( "," ) );
 
-            int campusId = cpAccounts.SelectedCampusId ?? 0;
-            this.SetUserPreference( keyPrefix + "account-campus", campusId.ToString() );
+            int? campusId = cpAccounts.SelectedCampusId;
+            this.SetUserPreference( keyPrefix + "account-campus", campusId.HasValue ? campusId.Value.ToString() : "" );
 
             mdAccountsPersonalFilter.Hide();
             LoadDropDowns();
