@@ -29,7 +29,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <Rock:RockDropDownList ID="ddlBatchName" runat="server" Label="Name" Visible="false" Required="true"/>
+                            <Rock:RockDropDownList ID="ddlBatchName" runat="server" Label="Name" Visible="false"/>
                             <Rock:RockTextBox ID="tbName" runat="server" Label="Name" Required="true" />
                             <Rock:RockDropDownList ID="ddlStatus" runat="server" Label="Status" Required="true"></Rock:RockDropDownList>
                             <Rock:DateTimePicker ID="dtpStart" runat="server" Label="Batch Start" Required="true" RequiredErrorMessage="A Batch Start Date is required" />
@@ -44,14 +44,6 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="attributes">
-                                <asp:PlaceHolder ID="phAttributes" runat="server" EnableViewState="false"></asp:PlaceHolder>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="actions">
                         <asp:LinkButton ID="lbSave" runat="server" Text="Save" CssClass="btn btn-primary" OnClick="lbSave_Click" />
                         <asp:LinkButton ID="lbCancel" runat="server" Text="Cancel" CssClass="btn btn-link" CausesValidation="false" OnClick="lbCancel_Click" />
@@ -63,7 +55,6 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <asp:Literal ID="lDetails" runat="server" />
-                            <asp:PlaceHolder ID="phReadonlyAttributes" runat="server"></asp:PlaceHolder>
                         </div>
                         <div class="col-sm-6">
                             <div class="grid">
