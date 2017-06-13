@@ -73,6 +73,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.Utilities">
+      <HintPath>..\libs\EFUtilities\EntityFramework.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="EPPlus">
       <HintPath>..\libs\EPPlus\EPPlus.dll</HintPath>
     </Reference>
@@ -968,6 +971,7 @@
     <Compile Include="Plugin\HotFixes\004_FixGradeRequiredAttribute.cs" />
     <Compile Include="Plugin\HotFixes\005_FixCheckinAdminRoute.cs" />
     <Compile Include="Plugin\HotFixes\006_FixCheckinPrevPages.cs" />
+    <Compile Include="Plugin\HotFixes\023_SecurityCodeLength.cs" />
     <Compile Include="Plugin\HotFixes\022_Fundraising.cs" />
     <Compile Include="Plugin\HotFixes\017_FixBackgroundCheckOptionalCampus.cs" />
     <Compile Include="Plugin\HotFixes\016_SetInactiveFamilies.cs" />
@@ -985,6 +989,7 @@
     <Compile Include="Plugin\HotFixes\019_FixIpadClientPrinting.cs" />
     <Compile Include="Plugin\HotFixes\018_RestrictGroupRegistrationGroupTypes.cs" />
     <Compile Include="Plugin\HotFixes\024_PrayerRequestAttributes.cs" />
+    <Compile Include="Plugin\HotFixes\025_PersonGivingEnvelopeAttribute.cs" />
     <Compile Include="Plugin\Migration.cs" />
     <Compile Include="Plugin\VersionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
