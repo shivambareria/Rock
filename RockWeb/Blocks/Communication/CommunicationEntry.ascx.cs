@@ -218,6 +218,7 @@ namespace RockWeb.Blocks.Communication
             string mode = GetAttributeValue( "Mode" );
             _fullMode = string.IsNullOrWhiteSpace( mode ) || mode != "Simple";
             ppAddPerson.Visible = _fullMode;
+            lbRemoveAllRecipients.Visible = _fullMode;
             cbBulk.Visible = _fullMode;
             ddlTemplate.Visible = _fullMode;
             dtpFutureSend.Visible = _fullMode;
@@ -352,9 +353,9 @@ namespace RockWeb.Blocks.Communication
                     if ( Person != null )
                     {
                         var HasPersonalDevice = new PersonalDeviceService( context ).Queryable()
-                            .Where( pd => 
-                                pd.PersonAliasId.HasValue && 
-                                pd.PersonAliasId == Person.PrimaryAliasId && 
+                            .Where( pd =>
+                                pd.PersonAliasId.HasValue &&
+                                pd.PersonAliasId == Person.PrimaryAliasId &&
                                 pd.NotificationsEnabled )
                             .Any();
                         Recipients.Add( new Recipient( Person, Person.PhoneNumbers.Any( a => a.IsMessagingEnabled ), HasPersonalDevice, CommunicationRecipientStatus.Pending ) );
@@ -891,7 +892,7 @@ namespace RockWeb.Blocks.Communication
                 var medium = MediumContainer.GetComponentByEntityTypeId( MediumEntityTypeId );
                 if ( medium != null )
                 {
-                    foreach ( var template in new CommunicationTemplateService( new RockContext() ).Queryable().Where(a => a.IsActive)
+                    foreach ( var template in new CommunicationTemplateService( new RockContext() ).Queryable().Where( a => a.IsActive )
                         .OrderBy( t => t.Name ) )
                     {
                         if ( template.IsAuthorized( Authorization.VIEW, CurrentPerson ) )
@@ -938,7 +939,7 @@ namespace RockWeb.Blocks.Communication
                 lbShowAllRecipients.Visible = false;
             }
 
-            lbRemoveAllRecipients.Visible = Recipients.Where( r => r.Status == CommunicationRecipientStatus.Pending ).Any();
+            lbRemoveAllRecipients.Visible = Recipients.Where( r => r.Status == CommunicationRecipientStatus.Pending ).Any() && _fullMode;
 
             rptRecipients.DataBind();
 
@@ -997,7 +998,7 @@ namespace RockWeb.Blocks.Communication
                 var mediumControl = component.GetControl( !_fullMode );
                 if ( mediumControl is Rock.Web.UI.Controls.Communication.Email )
                 {
-                    ( (Rock.Web.UI.Controls.Communication.Email)mediumControl ).AllowCcBcc = GetAttributeValue( "AllowCcBcc" ).AsBoolean();
+                    ( ( Rock.Web.UI.Controls.Communication.Email ) mediumControl ).AllowCcBcc = GetAttributeValue( "AllowCcBcc" ).AsBoolean();
                 }
                 mediumControl.ID = "commControl";
                 mediumControl.IsTemplate = false;
@@ -1015,7 +1016,7 @@ namespace RockWeb.Blocks.Communication
                 // if this is an email with an HTML control and there are block settings to provide updated content directories set them
                 if ( mediumControl is Rock.Web.UI.Controls.Communication.Email )
                 {
-                    var htmlControl = (HtmlEditor)mediumControl.FindControl( "htmlMessage_commControl" );
+                    var htmlControl = ( HtmlEditor ) mediumControl.FindControl( "htmlMessage_commControl" );
 
                     if ( htmlControl != null )
                     {
@@ -1265,7 +1266,7 @@ namespace RockWeb.Blocks.Communication
 
             GetMediumData();
 
-            foreach( var recipient in communication.Recipients )
+            foreach ( var recipient in communication.Recipients )
             {
                 recipient.MediumEntityTypeId = MediumEntityTypeId;
             }
